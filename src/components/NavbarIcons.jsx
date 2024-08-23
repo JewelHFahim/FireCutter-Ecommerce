@@ -50,6 +50,7 @@ const NavbarIcons = () => {
   };
 
   const { cart, count, getCart } = useCartStore();
+  
   useEffect(() => {
     getCart(wixClient);
   }, [wixClient, getCart]);
@@ -67,13 +68,7 @@ const NavbarIcons = () => {
       />
       {isProfileOpen && (
         <div className="absolute bg-white z-10 left-0 top-12 p-4 rounded-md text-sm shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-          {/* <Link href="/profile">Profile</Link> */}
           <Link href="/profile" onClick={() => setIsProfileOpen(false)}>Profile</Link>
-
-
-          {/* <button className="mt-2 cursor-pointer" onClick={handleLogout}>
-            {isLoading ? "Logging out" : "Logout"}
-          </button> */}
 
           <button
             className={`mt-2 cursor-pointer ${

@@ -50,7 +50,7 @@ const ProductList = async ({ categoryId, limit, searchParams }) => {
               alt=""
               fill
               sizes="25vw"
-              className="absolute object-contain md:object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
+              className="absolute object-cover rounded-md z-10 hover:opacity-0 transition-opacity easy duration-500"
             />
             {product.media?.items && (
               <Image
@@ -58,7 +58,7 @@ const ProductList = async ({ categoryId, limit, searchParams }) => {
                 alt=""
                 fill
                 sizes="25vw"
-                className="absolute object-contain md:object-cover rounded-md"
+                className="absolute object-cover rounded-md"
               />
             )}
           </div>
@@ -71,8 +71,12 @@ const ProductList = async ({ categoryId, limit, searchParams }) => {
           {product.additionalInfoSections && (
             <div
               className="text-sm text-gray-500"
-              dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(product.additionalInfoSections.find(
-                    (section) => section.title === "shortDesc") ?.description || ""),
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(
+                  product.additionalInfoSections.find(
+                    (section) => section.title === "shortDesc"
+                  )?.description || ""
+                ),
               }}
             ></div>
           )}
