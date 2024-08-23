@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import CartModal from "./CartModal";
 import { useWixClient } from "@/hooks/useWixClient";
 import Cookies from "js-cookie";
 import { useCartStore } from "@/hooks/useCartStore";
+import CartModal from "./cartModal";
 
 const NavbarIcons = () => {
   const router = useRouter();
@@ -25,13 +25,28 @@ const NavbarIcons = () => {
     }
   };
 
+  // const handleLogout = async () => {
+  //   setIsLoading(true);
+  //   Cookies.remove("refreshToken");
+  //   const { logoutUrl } = await wixClient.auth.logout(window.location.href);
+  //   setIsLoading(false);
+  //   setIsProfileOpen(false);
+  //   router.push(logoutUrl);
+  // };
+
   const handleLogout = async () => {
-    setIsLoading(true);
-    Cookies.remove("refreshToken");
-    const { logoutUrl } = await wixClient.auth.logout(window.location.href);
-    setIsLoading(false);
-    setIsProfileOpen(false);
-    router.push(logoutUrl);
+    try {
+      setIsLoading(true);
+      Cookies.remove("refreshToken");
+      const { logoutUrl } = await wixClient.auth.logout(window.location.href);
+      router.push(logoutUrl);
+    } catch (error) {
+      console.error("Logout failed:", error);
+      // Optionally, set an error message to display to the user
+    } finally {
+      setIsLoading(false);
+      setIsProfileOpen(false);
+    }
   };
 
   const { cart, count, getCart } = useCartStore();
@@ -52,9 +67,22 @@ const NavbarIcons = () => {
       />
       {isProfileOpen && (
         <div className="absolute bg-white z-10 left-0 top-12 p-4 rounded-md text-sm shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
-          <Link href="/profile">Profile</Link>
-          <button className="mt-2 cursor-pointer" onClick={handleLogout}>
+          {/* <Link href="/profile">Profile</Link> */}
+          <Link href="/profile" onClick={() => setIsProfileOpen(false)}>Profile</Link>
+
+
+          {/* <button className="mt-2 cursor-pointer" onClick={handleLogout}>
             {isLoading ? "Logging out" : "Logout"}
+          </button> */}
+
+          <button
+            className={`mt-2 cursor-pointer ${
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            onClick={handleLogout}
+            disabled={isLoading}
+          >
+            {isLoading ? "Logging out..." : "Logout"}
           </button>
         </div>
       )}

@@ -1,5 +1,4 @@
 import { wixClientServer } from "@/lib/wixClientServer";
-import { products } from "@wix/stores";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
