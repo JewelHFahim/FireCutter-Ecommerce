@@ -29,7 +29,15 @@ const SinglePage = async ({ params }) => {
       {/* Texts */}
       <div className="w-full lg:w-1/2 h-max flex flex-col gap-6">
         <h1 className="text-4xl font-medium">{product.name}</h1>
-        <p className="text-gray-500">{product.description}</p>
+
+        {product.description && (
+          <div
+            className=" text-gray-500"
+            dangerouslySetInnerHTML={{
+              __html: DOMPurify.sanitize(product.description),
+            }}
+          ></div>
+        )}
 
         <div className="h-[2px] bg-gray-100" />
         <div className="flex items-center gap-4">
@@ -69,7 +77,11 @@ const SinglePage = async ({ params }) => {
         {product?.additionalInfoSections?.map((section) => (
           <div className="text-sm" key={section.title}>
             <h4 className="font-medium mb-4">{section.title}</h4>
-            <p>{section.description}</p>
+            <div
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(product.description),
+              }}
+            ></div>
           </div>
         ))}
       </div>

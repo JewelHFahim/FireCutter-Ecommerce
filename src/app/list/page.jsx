@@ -1,4 +1,5 @@
 import Filter from "@/components/Filters";
+import LoadingCard from "@/components/LoadingCard";
 import ProductList from "@/components/ProductList";
 import { wixClientServer } from "@/lib/wixClientServer";
 import Image from "next/image";
@@ -36,7 +37,7 @@ const ListPage = async ({ searchParams }) => {
       <h1 className="mt-12 text-xl font-semibold">
         {cat?.collection?.name} For You
       </h1>
-      <Suspense fallback={"loading..."}>
+      <Suspense fallback={<LoadingCard />}>
         <ProductList
           categoryId={
             cat.collection?._id || "00000000-000000-000000-000000000001"
