@@ -91,45 +91,7 @@ const LoginPage = () => {
           break;
       }
 
-      // switch (response.loginState) {
-      //   case LoginState.SUCCESS:
-      //     setMessage("Successful! You are redirected.");
-      //     const tokens = await wixClient.auth.getMemberTokensForDirectLogin(
-      //       response.data.sessionToken
-      //     );
-      //     console.log(tokens?.refreshToken);
 
-      //     Cookies.set("refreshToken", JSON.stringify(tokens.refreshToken), {
-      //       expires: 2,
-      //     });
-
-      //     wixClient.auth.setTokens(tokens);
-      //     router.push("/");
-      //     break;
-
-      //   case LoginState.FAILURE:
-      //     if (
-      //       response.errorCode === "invalidEmail" ||
-      //       response.errorCode === "invalidPassword"
-      //     ) {
-      //       setError("Invalid email or password");
-      //     } else if (response.errorCode === "emailAlreadyExists") {
-      //       setError("Email already exists!");
-      //     } else if (response.errorCode === "resetPassword") {
-      //       setError("You need to reset your password");
-      //     } else {
-      //       setError("Smothing went wrong!");
-      //     }
-
-      //   case LoginState.EMAIL_VERIFICATION_REQUIRED:
-      //     setMode(MODE.EMAIL_VERIFICATION);
-
-      //   case LoginState.OWNER_APPROVAL_REQUIRED:
-      //     setMessage("Your account is pending approval");
-
-      //   default:
-      //     break;
-      // }
       switch (response.loginState) {
         case LoginState.SUCCESS:
           setMessage("Successful! You are redirected.");

@@ -1,28 +1,4 @@
-// import { createClient, OAuthStrategy } from "@wix/sdk";
-// import { NextResponse } from "next/server";
 
-// export const middleware = async (request) => {
-//   const cookies = request.cookies;
-//   const res = NextResponse.next();
-
-//   if (cookies.get("refreshToken")) {
-//     return res;
-//   }
-
-//   const wixClient = createClient({
-//     auth: OAuthStrategy({ clientId: process.env.NEXT_PUBLIC_WIX_CLIENT_ID }),
-//   });
-
-//   const tokens = await wixClient.auth.generateVisitorTokens();
-//   res.cookies.set("refreshToken", JSON.stringify(tokens.refreshToken)),
-//     {
-//       maxAge: 60 * 60 * 24 * 30,
-//     };
-//   return res;
-// };
-
-
-// ==================== Updated Code =====================
 import { createClient, OAuthStrategy } from "@wix/sdk";
 import { NextResponse } from "next/server";
 
@@ -31,7 +7,6 @@ export const middleware = async (request) => {
   const res = NextResponse.next();
 
   if (cookies.get("refreshToken")) {
-    // If refreshToken exists, proceed with the request
     return res;
   }
 
@@ -39,7 +14,6 @@ export const middleware = async (request) => {
   const wixClient = createClient({
     auth: OAuthStrategy({
       clientId: process.env.NEXT_PUBLIC_WIX_CLIENT_ID,
-      // Consider adding clientSecret if needed
     }),
   });
 
